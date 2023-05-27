@@ -5,13 +5,26 @@ class Filter extends React.Component {
   state = {
     filter: '',
   };
+
+  handleFilterChange = event => {
+    const filter = event.target.value;
+    this.setState({ filter }, () => {
+      const { onChange } = this.props;
+      onChange(this.state.filter);
+    });
+  };
+
   render() {
+    const { filter } = this.state;
+
     return (
       <>
         <InputName>Find contacts by name</InputName>
         <Input
           type="text"
-          name="name"
+          name="filter"
+          value={filter}
+          onChange={this.handleFilterChange}
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
@@ -20,4 +33,5 @@ class Filter extends React.Component {
     );
   }
 }
+
 export default Filter;

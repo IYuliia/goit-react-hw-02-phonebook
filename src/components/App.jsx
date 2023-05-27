@@ -1,4 +1,5 @@
 import React from 'react';
+import { nanoid } from 'nanoid';
 import ContactList from './ContactList';
 import Filter from './Filter';
 import ContactForm from './ContactForm';
@@ -9,14 +10,30 @@ class App extends React.Component {
     name: '',
     number: '',
   };
+
+  handleInputChange = event => {
+    const { name, value } = event.currentTarget;
+    this.setState({ [name]: value });
+  };
+
+  handleFilterChange = filter => {
+    console.log(filter);
+  };
+
   render() {
+    const nameId = nanoid();
+    const { name, number } = this.state;
     return (
       <Box>
         <Title>Phonebook</Title>
-        <ContactForm />
+        <ContactForm
+          name={name}
+          number={number}
+          onChange={this.handleInputChange}
+        />
         <Title>Contacts</Title>
-        <Filter />
-        <ContactList />
+        <Filter onChange={this.handleFilterChange} />
+        <ContactList key={nameId} name={name} number={number} />
       </Box>
     );
   }

@@ -1,16 +1,17 @@
 import React from 'react';
 import { DeleteButton, ListItem } from './Phonebook.styled';
 
-class ContactList extends React.Component {
-  render() {
-    return (
-      <>
-        <ul>
-          <ListItem>Yuliia</ListItem>
+const ContactList = ({ name, number }) => {
+  return (
+    <>
+      <ul>
+        <ListItem>
+          {name}: {number}
           <DeleteButton>Delete</DeleteButton>
-        </ul>
-      </>
-    );
-  }
-}
+        </ListItem>
+      </ul>
+    </>
+  );
+};
+
 export default ContactList;
